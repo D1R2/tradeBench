@@ -1,0 +1,23 @@
+The following trade data will need to be imported: 
+  1. Daily tick data in the form of a .txt file.
+  2. Daily minute data in the form of a .txt file.
+  3. Trade data
+
+Database Structure: 3 db's with many tables or 1 DB with 3 tables?
+
+Classes: 
+  - Data-retriaval (C#)
+      - Downloads files from NinjaTrader
+  - DB management (Python SQLite): 
+      - Imports and Exports
+      - Backups and edits
+      - Queries
+  - Log generator ({Python): 
+      - Generates log with desired fields.
+      - Stats and such
+  - Chart generator (Python: : 
+      - Generate charts w/ trades displayed
+  - Strategy Simulator (Python: ): 
+      -Tests different strategies on given trade entries.
+  - GUI: 
+      - Interface and display windows.
