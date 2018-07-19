@@ -12,7 +12,7 @@ Classes:
       - Imports and Exports
       - Backups and edits
       - Queries
-  - Log generator ({Python): 
+  - Log generator (Python): 
       - Generates log with desired fields.
       - Stats and such
   - Chart generator (Python: : 
@@ -21,3 +21,4 @@ Classes:
       -Tests different strategies on given trade entries.
   - GUI: 
       - Interface and display windows.
+  - Controller Class
