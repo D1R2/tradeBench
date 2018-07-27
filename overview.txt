@@ -8,7 +8,8 @@ Database Structure: 3 db's with many tables or 1 DB with 3 tables?
 Classes: 
   - Data-retriaval (C#)
       - Downloads files from NinjaTrader
-  - DB management (Python SQLite): 
+  - Text file management for market data. 
+  - DB management for trade data (Python SQLite): 
       - Imports and Exports
       - Backups and edits
       - Queries
