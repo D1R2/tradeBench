@@ -7,6 +7,7 @@ import sqlite3
 
 
 def processMinuteMarketData(filePath, folderPath, instrument, granularity, month, year):
+#Read .txt file and store the data into a database.
 #Raw data time is offset by 40,000
     dbName = filePath + "\\" + instrument + "minute" 
     tableName = instrument + str(year)
@@ -18,13 +19,6 @@ def processMinuteMarketData(filePath, folderPath, instrument, granularity, month
     creatTable(conn, tableName, columnArray, primaryKey)
     
     
-
-##def getMarketData(dataFolder, instrument, date):
-##    for root, dirs, files in os.walk(folderPath):
-##        for name in files:
-##            if '.txt' in name && instrument in name && date in name:
-##                
-##
 
 
 def createTable(connection, tableName, columnArray, primaryKey = True):
@@ -59,3 +53,9 @@ def insertIntoTable(connection, tableName, values, columnNames = None):
         insertString += ", " + values[i]
     
             
+##def getMarketData(dataFolder, instrument, date):
+##    for root, dirs, files in os.walk(folderPath):
+##        for name in files:
+##            if '.txt' in name && instrument in name && date in name:
+##                
+##
