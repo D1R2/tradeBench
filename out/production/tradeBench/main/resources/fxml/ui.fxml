@@ -14,7 +14,6 @@
         <Menu text="View">
             <items>
                 <MenuItem text="Analyze" />
-                <MenuItem text="Filter Trades" fx:id="filterTrades" onAction="#setFilter"/>
             </items>
         </Menu>
     </MenuBar>

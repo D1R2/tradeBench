@@ -2,6 +2,7 @@ package main.java;
 
 import javafx.beans.property.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
@@ -35,6 +36,7 @@ public class Controller {
     @FXML TableColumn<Trade, Double> entryPriceCol;
     @FXML TableColumn<Trade, String> exitTimeCol;
     @FXML TableColumn<Trade, Double> exitPriceCol;
+    @FXML MenuItem filterTrades;
 
 
     // METHODS
@@ -83,6 +85,11 @@ public class Controller {
         candleStickChart.setLegendVisible(false);
         chartHolder.getChildren().add(candleStickChart);
 
+    }
+
+    @FXML
+    public void setFilter() {
+    //You can do a dialog box inside here to get input. Just google how to do it specifically with javaFX.
     }
 
 }
