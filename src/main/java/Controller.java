@@ -1,27 +1,33 @@
 package main.java;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
+import main.java.Controls.*;
+import main.java.Models.*;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * This class interfaces the GUI with the application logic. Anything that can
  * happen to the GUI happens in this class, except for the original definition
  * of the GUI elements.
  *
- * @author daniel
+ * @author Daniel Gelber
  * @version 1.0
  * Created  2018-08-03
- * Modified 2018-08-03
+ * Modified 2018-08-08
  */
 public class Controller {
 
+    // INSTANCE VARIABLES
+
+    // A VBox that holds the chart is necessary because the CandleStickChart cannot be instantiated in the view.
+    // The way that the author made the class requires the bars to be given on instantiation.
+    @FXML VBox chartHolder;
     @FXML TableView tradesTable;
     @FXML TableColumn<Trade, Integer> numberCol;
     @FXML TableColumn<Trade, String> typeCol;
@@ -30,27 +36,52 @@ public class Controller {
     @FXML TableColumn<Trade, String> exitTimeCol;
     @FXML TableColumn<Trade, Double> exitPriceCol;
 
+
+    // METHODS
+
+    /**
+     * Called when the view is created. This loads in the starting table and chart.
+     */
     @FXML
     public void initialize() {
 
+        // These set which property from trade goes into which column in the table.
+        // The formatter controls how the date is displayed.
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-        Trade t1 = new Trade(1, "short", LocalDateTime.parse("2018-01-01 09:30:15", formatter),
-                LocalDateTime.parse("2018-01-01 09:30:48", formatter), 2950.50, 2950.00);
-        Trade t2 = new Trade(1, "long", LocalDateTime.parse("2018-01-01 09:38:19", formatter),
-                LocalDateTime.parse("2018-01-01 09:38:25", formatter), 2952.50, 2952.50);
-        Trade t3 = new Trade(1, "long", LocalDateTime.parse("2018-01-01 10:04:55", formatter),
-                LocalDateTime.parse("2018-01-01 10:05:48", formatter), 2957.75, 2958.50);
-        Trade t4 = new Trade(1, "long", LocalDateTime.parse("2018-01-01 10:10:21", formatter),
-                LocalDateTime.parse("2018-01-01 10:10:59", formatter), 2957.50, 2956.25);
-        tradesTable.getItems().addAll(t1, t2, t3, t4);
-
         numberCol.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getNumber()).asObject());
         typeCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getType()));
         entryTimeCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getEntryTime().format(formatter)));
         exitTimeCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getExitTime().format(formatter)));
         entryPriceCol.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().getEntryPrice()).asObject());
         exitPriceCol.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().getExitPrice()).asObject());
+
+        // Call a method in TradeBenchModel to get a list of Trades to go in the table.
+
+        // Loop through that list, adding each Trade to tradesTable.
+
+        // If there are no trades, load an empty chart as the child of
+
+        // Otherwise, use loadChart(Trade trade) to default to the first item in the table.
+
+    }
+
+    /**
+     * Reloads the chart with new data, particularly when a user
+     * clicks on a new trade in the table.
+     * @param trade the trade to load the chart with.
+     */
+    public void loadChart(Trade trade) {
+
+        // Clear the current chart
+        chartHolder.getChildren().clear();
+
+        // Get list of bars based on trade object
+        List<BarData> bars = TradeBenchModel.getBars(trade);
+
+        // Put the bars into the chart
+        CandleStickChart candleStickChart = new CandleStickChart(null, bars);
+        candleStickChart.setLegendVisible(false);
+        chartHolder.getChildren().add(candleStickChart);
 
     }
 
