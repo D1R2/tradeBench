@@ -1,0 +1,41 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+
+<VBox fx:controller="main.java.Controller"
+      xmlns:fx="http://javafx.com/fxml" alignment="center">
+
+    <MenuBar>
+        <Menu text="File">
+            <items>
+                <MenuItem text="Close" />
+            </items>
+        </Menu>
+        <Menu text="View">
+            <items>
+                <MenuItem text="Analyze" />
+            </items>
+        </Menu>
+    </MenuBar>
+
+    <SplitPane VBox.vgrow="ALWAYS" orientation="VERTICAL" dividerPositions="0.6">
+        <items>
+            <VBox alignment="CENTER" fx:id="chartHolder" />
+            <TableView fx:id="tradesTable">
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                <columns>
+                    <TableColumn text="Number" minWidth="100" fx:id="numberCol" />
+                    <TableColumn text="Type" minWidth="100" fx:id="typeCol" />
+                    <TableColumn text="Entry Time" minWidth="100" fx:id="entryTimeCol" />
+                    <TableColumn text="Exit Time" minWidth="100" fx:id="exitTimeCol" />
+                    <TableColumn text="Entry Price" minWidth="100" fx:id="entryPriceCol" />
+                    <TableColumn text="Exit Price" minWidth="100" fx:id="exitPriceCol" />
+                </columns>
+                <items>
+                    <FXCollections fx:factory="observableArrayList" />
+                </items>
+            </TableView>
+        </items>
+    </SplitPane>
+
+</VBox>
