@@ -23,3 +23,13 @@ Classes:
   - GUI: 
       - Interface and display windows.
   - Controller Class
+
+
+To Do (8/9/2018): 
+Workflow: 
+	1. Open Program
+	2. Set connection to database(s): URL --DONE
+	3. Set statement (should be bundled with setting connection) --DONE
+	4. Process trade and market data if needed: tableNames, fileNames
+	5. Load trades: StartDate, EndDate, TableName 
+	6. Select trade and load chart.

@@ -24,17 +24,17 @@ public class Trade {
     private int qty;
     private double entryPrice;
     private double exitPrice;
-    private LocalDateTime entryDate;
-    private LocalDateTime entryTime;
-    private LocalDateTime exitDate;
-    private LocalDateTime exitTime;
+    private String entryDate;
+    private String entryTime;
+    private String exitDate;
+    private String exitTime;
 
 
     // CONSTRUCTOR
 
     public Trade(int tradeNumber, String instrument, String account, String strategy, String marketPosition, int qty,
-                 double entryPrice, double exitPrice, LocalDateTime entryDate, LocalDateTime entryTime, LocalDateTime exitDate,
-                 LocalDateTime exitTime) {
+                 double entryPrice, double exitPrice, String entryDate, String entryTime, String exitDate,
+                 String exitTime) {
         this.tradeNumber = tradeNumber;
         this.instrument = instrument;
         this.account = account;
@@ -132,42 +132,42 @@ public class Trade {
     }
 
 
-    public LocalDateTime getEntryDate() {
+    public String getEntryDate() {
         return entryDate;
     }
 
 
-    public void setEntryDate(LocalDateTime entryDate) {
+    public void setEntryDate(String entryDate) {
         this.entryDate = entryDate;
     }
 
 
-    public LocalDateTime getEntryTime() {
+    public String getEntryTime() {
         return entryTime;
     }
 
 
-    public void setEntryTime(LocalDateTime entryTime) {
+    public void setEntryTime(String entryTime) {
         this.entryTime = entryTime;
     }
 
 
-    public LocalDateTime getExitDate() {
+    public String getExitDate() {
         return exitDate;
     }
 
 
-    public void setExitDate(LocalDateTime exitDate) {
+    public void setExitDate(String exitDate) {
         this.exitDate = exitDate;
     }
 
 
-    public LocalDateTime getExitTime() {
+    public String getExitTime() {
         return exitTime;
     }
 
 
-    public void setExitTime(LocalDateTime exitTime) {
+    public void setExitTime(String exitTime) {
         this.exitTime = exitTime;
     }
 
