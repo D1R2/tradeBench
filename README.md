@@ -21,6 +21,7 @@ An application for logging and reviewing trades, made specifically for futures t
 ##### Basic Maintenence: 
 - Spring Cleaning
 - Polish/add documentation.
+- Update authorship 
 
 
 
