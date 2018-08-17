@@ -8,6 +8,7 @@ An application for logging and reviewing trades, made specifically for futures t
 
 ### To-Do
 ##### Add features:
+- Add randomized sample data.
 - Primary key constraints to data tables. 
 - Chart scope variance with scroll bar (set viewable range and allow more chart to exist outside viewable range). 
 - Click trade # to view chart instead of through file-menu options. 
@@ -17,11 +18,15 @@ An application for logging and reviewing trades, made specifically for futures t
 ##### Trouble Shooting: 
 - Program indicates "Program not responding" when processing larger data file. 
 - File processing is slow. Revisit processing functions and determine how to improve. 
+- Standardize .db location. 
 
 ##### Basic Maintenence: 
 - Spring Cleaning
 - Polish/add documentation.
 - Update authorship 
 
-
+##### Finalize: 
+1. FIXME check
+2. Authorship check
+3. Package. 
 
