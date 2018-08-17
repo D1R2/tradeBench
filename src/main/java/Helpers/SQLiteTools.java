@@ -19,6 +19,7 @@ public class SQLiteTools {
         return myConn;
     }
 
+
     public static Statement setStatement(Connection myConn) {
 
         Statement myStatement = null;
@@ -55,14 +56,4 @@ public class SQLiteTools {
         }
     }
 
-
-    public static void dropTable(Statement statement, String tableName) {
-        String sql = "DROP TABLE " + tableName;
-        try {
-            statement.execute(sql);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

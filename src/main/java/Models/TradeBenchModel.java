@@ -4,9 +4,10 @@ import main.java.Helpers.SQLiteTools;
 
 import java.io.File;
 import java.sql.*;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.util.Date;
 
 /**
  * This class models the application, with the chart and the table.
@@ -20,6 +21,7 @@ public final class TradeBenchModel {
     // PROPERTIES
 
     private static ArrayList<Trade> trades;
+    private static ArrayList<BarData> bars;
     private static Statement statement;
     private static String url = "C:\\Users\\rando\\eclipse-workspace\\TradeBench\\test.db"; //FIXME get program file db working.
     private static File file;
@@ -91,7 +93,7 @@ public final class TradeBenchModel {
         SQLiteTools.createTable(statement, tableName, columns, types);
     }
 
-    public static void setTradeList(String tableName, String startDate, String endDate) {
+    public static ArrayList<Trade> getTradeList(String tableName, String startDate, String endDate) {
         ArrayList<Trade> tradeList = new ArrayList<Trade>();
 
         sql = "SELECT * FROM " + tableName + " WHERE EntryDate BETWEEN '" + startDate + "' AND '" + endDate + "';";
@@ -122,10 +124,55 @@ public final class TradeBenchModel {
         }
 
         trades = tradeList;
+        return trades;
     }
 
-    public static ArrayList<BarData> getBars(Trade trade) {
-        return null;
+    //Create and return a list of Bar objects to create the trade Chart from.
+    //FIXME Add more appropriate time range function.
+    public static ArrayList<BarData> getBars(Trade trade, String marketTable) {
+
+        String startDate = trade.getEntryDate();
+        String endDate = trade.getExitDate();
+        String entryTime = trade.getEntryTime();
+        String exitTime = trade.getExitTime();
+
+        String[] times = offsetTradeTime(entryTime, exitTime);
+
+        String startTime = times[0];
+        String endTime = times[1];
+
+        sql = "SELECT * FROM " + marketTable + " WHERE DATE BETWEEN '" + startDate + "' AND '" + endDate +
+                "' AND TIME BETWEEN '" + startTime + "' AND '" + endTime + "';";
+
+        bars = new ArrayList<BarData>();
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+        try {
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()) {
+                String date = rs.getString("Date");
+                String time = rs.getString("Time");
+                double open = rs.getDouble("Open");
+                double high = rs.getDouble("High");
+                double low = rs.getDouble("Low");
+                double close = rs.getDouble("Close");
+                int volume = rs.getInt("Volume");
+
+                String dateTime = date + " " + time;
+                Date formattedDate = df.parse(dateTime);
+                GregorianCalendar cal = new GregorianCalendar();
+                cal.setTime(formattedDate);
+
+
+                bars.add(new BarData(cal, open, high, low, close, volume));
+
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return bars;
     }
 
     // TODO feel free to add more methods..
@@ -329,6 +376,90 @@ public final class TradeBenchModel {
         String[] formattedDateTime = {formattedDate, formattedTime};
 
         return formattedDateTime;
+    }
+
+
+    //Grabs specified trade for use in Controller --> Load Chart
+    public static Trade getTrade(String tableName, String tradeNumber) {
+
+        Trade trade = null;
+
+        sql = "SELECT * FROM " + tableName + " WHERE TradeNumber = " + tradeNumber + ";";
+
+        try {
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()) {
+
+                String instrument = rs.getString("Instrument");
+                String account = rs.getString("Account");
+                String strategy = rs.getString("Strategy");
+                String marketPosition = rs.getString("MarketPosition");
+                int qty = rs.getInt("Qty");
+                double entryPrice = rs.getDouble("EntryPrice");
+                double exitPrice = rs.getDouble("ExitPrice");
+                String entryDate = rs.getString("EntryDate");
+                String entryTime = rs.getString("EntryTime");
+                String exitDate = rs.getString("ExitDate");
+                String exitTime = rs.getString("ExitTime");
+
+                trade = new Trade(Integer.parseInt(tradeNumber), instrument, account, strategy, marketPosition,
+                        qty, entryPrice, exitPrice, entryDate, entryTime, exitDate, exitTime);
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return trade;
+    }
+
+    public static String[] offsetTradeTime(String entryTime, String exitTime) {
+        String [] entrySplit = entryTime.split(":");
+        String [] exitSplit = exitTime.split(":");
+
+        int entryHour = Integer.parseInt(entrySplit[0]);
+        int exitHour = Integer.parseInt(exitSplit[0]);
+
+        entryHour = entryHour - 2;
+        if(entryHour < 9) {
+            entryHour = 9;
+            entrySplit[1] = "30";
+        }
+
+        exitHour = exitHour + 1;
+        if(exitHour > 16) {
+            exitHour = 16;
+            exitSplit[1] = "00";
+        }
+
+        String entryHourString = Integer.toString(entryHour);
+        String exitHourString = Integer.toString(exitHour);
+
+        if(entryHourString.length() < 2) {
+            entryHourString = "0" + entryHourString;
+        }
+
+        if(exitHourString.length() < 2) {
+            exitHourString = "0" + exitHourString;
+        }
+
+        entryTime = entryHourString + ":" + entrySplit[1] + ":" + entrySplit[2];
+        exitTime = exitHourString + ":" + exitSplit[1] + ":" + exitSplit[2];
+
+        String[] times = {entryTime, exitTime};
+
+        return times;
+    }
+
+    public static void dropTable(String tableName) {
+        String sql = "DROP TABLE " + tableName;
+        try {
+            statement.execute(sql);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

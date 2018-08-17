@@ -42,11 +42,11 @@ public class Controller {
     @FXML TableColumn<Trade, String> exitDateCol;
     @FXML TableColumn<Trade, String> exitTimeCol;
     @FXML TableColumn<Trade, Double> exitPriceCol;
-    @FXML MenuItem filterTrades;
     @FXML MenuItem loadTrades;
-    @FXML MenuItem marketTable;
-    @FXML MenuItem tradeTable;
+    @FXML MenuItem loadChart;
+    @FXML MenuItem deleteTable;
 
+    private CandleStickChart chart;
     private String output;
     private String startDate;
     private String endDate;
@@ -88,20 +88,53 @@ public class Controller {
     /**
      * Reloads the chart with new data, particularly when a user
      * clicks on a new trade in the table.
-     * @param trade the trade to load the chart with.
+     * //@param trade the trade to load the chart with. FIXME remove this line?
      */
-    public void loadChart(Trade trade) {
+    public void loadChart() {
+        //FIXME change to get input by clicking a trade from the chart.
+
+        //Get names for dropdown choices.
+        ArrayList<String> tableChoices = TradeBenchModel.getTableNames();
+        tableChoices.add("Select Table");
+
+        //Select trade table to load from using dropdown dialog.
+        String tradeTableName = optionDialog("Select Trade Table", "Select which trade data table you'd like" +
+                        " to use.", "Choose Table", tableChoices, "Select Table");
+
+        //Terminate process if table not selected.
+        if(tradeTableName.equals("Select Table")) {
+            warningAlert("Process Terminated", "Table not selected, please try again.");
+            return;
+        }
+
+        //Select trade number to load.
+        String tradeNumber = textInputDialog("Trade Number", "Which trade number would you like to display?",
+                "Trade #");
+
+        //Select market data table to load from.
+        String marketTableName = optionDialog("Select Market Table", "Select which market data table you'd " +
+                "like to load from.", "Choose Table", tableChoices, "Select Table");
+
+        //Terminate Process if table not selected.
+        if(marketTableName.equals("Select Table")) {
+            warningAlert("Process Terminated", "Table not selected. Please try again.");
+            return;
+        }
+
+        Trade trade = TradeBenchModel.getTrade(tradeTableName, tradeNumber);
 
         // Clear the current chart
         chartHolder.getChildren().clear();
 
         // Get list of bars based on trade object
-        List<BarData> bars = TradeBenchModel.getBars(trade);
+        //FIXME delete if no red.
+        List<BarData> bars = TradeBenchModel.getBars(trade, marketTableName);
 
         // Put the bars into the chart
         CandleStickChart candleStickChart = new CandleStickChart(null, bars);
         candleStickChart.setLegendVisible(false);
         chartHolder.getChildren().add(candleStickChart);
+
 
     }
 
@@ -169,12 +202,12 @@ public class Controller {
         ArrayList<String> choices = new ArrayList<String>();
         choices.add("Market Data");
         choices.add("Trade Data");
-        choices.add("Select Table");
+        choices.add("Select Table Type");
 
         String choice = optionDialog("New Table Type","Select new table type: ", "Table type: ",
-                choices,"Select Table");
+                choices,"Select Table Type");
 
-        if(choice != "Select Table") {
+        if(!choice.equals("Select Table Type")) {
             newTableName = textInputDialog("Create New Table", "Please enter name of new table.",
                     "Table Name: ");
             if(TradeBenchModel.checkExists(newTableName)){
@@ -214,12 +247,64 @@ public class Controller {
                     "Start Date: ");
             endDate = textInputDialog("End Date", "Please enter End Date in format yyyy-MM-dd",
                     "End Date: ");
-            TradeBenchModel.setTradeList(tradeTableName, startDate, endDate);
+            ArrayList<Trade> trades = TradeBenchModel.getTradeList(tradeTableName, startDate, endDate);
+
+            //FIXME Add trades to TableView tradesTable.
+            tradesTable.getItems().clear();
+
+            for (Trade t : trades){
+                tradesTable.getItems().add(t);
+            }
+
         }
         else {
             warningAlert("Table Not Found", "Please try again.");
         }
 
+    }
+
+    @FXML
+    public void deleteTable() {
+        ArrayList<String> tableChoices = TradeBenchModel.getTableNames();
+        tableChoices.add("Select Table");
+
+        ArrayList<String> yesNo = new ArrayList<String>();
+        yesNo.add("No");
+        yesNo.add("Yes");
+
+
+        String tableSelection = optionDialog("Select Table", "Select which table you'd like to delete.",
+                "Choose Table", tableChoices, "Select Table");
+
+
+        String confirm = "No";
+
+        if(!tableSelection.equals("Select Table")) {
+            confirm = optionDialog("WARNING", "This table will be PERMANENTLY DELETED.", "Are you sure you wish to proceed?",
+                    yesNo, "No");
+        }
+        else{
+            informationDialog("No table selected.", "Please try again.");
+            return;
+        }
+
+        String content = null;
+
+        if(confirm.equals("Yes")) {
+            TradeBenchModel.dropTable(tableSelection);
+            if(!TradeBenchModel.checkExists(tableSelection)) {
+                content = "The '" + tableSelection + "' table was succesfully deleted.";
+                informationDialog("Success.", content);
+            }
+            else {
+                content = "Something went wrong and the '" + tableSelection + "' table was not deleted.";
+                warningAlert("An error occured.", content);
+            }
+        }
+        else{
+            content = "The '" + tableSelection + "' was not deleted.";
+            informationDialog("Operation aborted.", content);
+        }
     }
 
     public String textInputDialog(String title, String header, String content) {
@@ -274,3 +359,4 @@ public class Controller {
         alert.showAndWait();
     }
 }
+

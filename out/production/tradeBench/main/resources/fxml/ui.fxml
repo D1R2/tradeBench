@@ -16,7 +16,9 @@
                     </items>
                 </Menu>
                 <MenuItem text="Load Trades" fx:id="loadTrades" onAction="#loadTrades" />
+                <MenuItem text="Load Chart" fx:id="loadChart" onAction="#loadChart"/>
                 <MenuItem text="Close" />
+                <MenuItem text="Delete Table" fx:id="deleteTable" onAction="#deleteTable" />
             </items>
         </Menu>
         <Menu text="View">
