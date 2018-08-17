@@ -25,6 +25,8 @@ import java.util.Optional;
  * Created  2018-08-03
  * Modified 2018-08-08
  */
+
+
 public class Controller {
 
     // INSTANCE VARIABLES
@@ -51,7 +53,6 @@ public class Controller {
     private String startDate;
     private String endDate;
     private String newTableName;
-
 
     // METHODS
 
