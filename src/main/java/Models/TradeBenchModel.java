@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author Daniel Gelber and David Randolph
  * Created  2018-08-08
- * Modified 2018-08-08
+ * Modified 2018-08-22
  */
 public final class TradeBenchModel {
 
@@ -28,13 +28,18 @@ public final class TradeBenchModel {
     private static Scanner scanner;
     private static String sql;
 
+
     // METHODS
+
     public static void initializer() {
+
         Connection myConn = SQLiteTools.setConn(url);
         statement = SQLiteTools.setStatement(myConn);
+
     }
 
     public static boolean checkExists(String tableName) {
+
         try {
             ResultSet rs = statement.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='" +tableName + "';");
             boolean exists = rs.next();
@@ -44,6 +49,7 @@ public final class TradeBenchModel {
             e.printStackTrace();
         }
         return false;
+
     }
     /**
      * Gets a list of bars to be displayed for selected trade. This method handles the logic,
@@ -52,6 +58,7 @@ public final class TradeBenchModel {
      */
 
     public static ArrayList<String> getTableNames(){
+
         ArrayList<String> tableArray = new ArrayList<String>();
 
         try {
@@ -65,6 +72,7 @@ public final class TradeBenchModel {
         }
 
         return tableArray;
+
     }
 
     public static void createMarketTable(String tableName) {
@@ -184,7 +192,6 @@ public final class TradeBenchModel {
             //INSTANTIATE FILE SCANNER
             file = new File(fileName);
             scanner = new Scanner(file);
-
 
             while(scanner.hasNextLine()) {
                 //SPLIT LINE INTO COMPONENTS
@@ -421,13 +428,13 @@ public final class TradeBenchModel {
         int entryHour = Integer.parseInt(entrySplit[0]);
         int exitHour = Integer.parseInt(exitSplit[0]);
 
-        entryHour = entryHour - 2;
+        entryHour = entryHour - 4;
         if(entryHour < 9) {
             entryHour = 9;
             entrySplit[1] = "30";
         }
 
-        exitHour = exitHour + 1;
+        exitHour = exitHour + 3;
         if(exitHour > 16) {
             exitHour = 16;
             exitSplit[1] = "00";

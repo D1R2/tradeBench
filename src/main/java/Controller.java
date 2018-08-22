@@ -75,15 +75,6 @@ public class Controller {
 
         TradeBenchModel.initializer();
 
-
-        // Call a method in TradeBenchModel to get a list of Trades to go in the table.
-
-        // Loop through that list, adding each Trade to tradesTable.
-
-        // If there are no trades, load an empty chart as the child of
-
-        // Otherwise, use loadChart(Trade trade) to default to the first item in the table.
-
     }
 
     /**
@@ -253,9 +244,8 @@ public class Controller {
             //FIXME Add trades to TableView tradesTable.
             tradesTable.getItems().clear();
 
-            for (Trade t : trades){
+            for (Trade t : trades)
                 tradesTable.getItems().add(t);
-            }
 
         }
         else {
@@ -281,8 +271,8 @@ public class Controller {
         String confirm = "No";
 
         if(!tableSelection.equals("Select Table")) {
-            confirm = optionDialog("WARNING", "This table will be PERMANENTLY DELETED.", "Are you sure you wish to proceed?",
-                    yesNo, "No");
+            confirm = optionDialog("WARNING", "This table will be PERMANENTLY DELETED.", "Are you " +
+                            "sure you wish to proceed?", yesNo, "No");
         }
         else{
             informationDialog("No table selected.", "Please try again.");
@@ -308,6 +298,13 @@ public class Controller {
         }
     }
 
+    /**
+     * A dialog box to get a String of text from a user.
+     * @param title     Title of the window the box appears in.
+     * @param header    Header of the window. Set null to not have one.
+     * @param content   The prompt for input.
+     * @return          The user's input.
+     */
     public String textInputDialog(String title, String header, String content) {
         this.output = "No Output";
         TextInputDialog dialog = new TextInputDialog("");

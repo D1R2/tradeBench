@@ -30,7 +30,9 @@
 
     <SplitPane VBox.vgrow="ALWAYS" orientation="VERTICAL" dividerPositions="0.6">
         <items>
-            <VBox alignment="CENTER" fx:id="chartHolder" />
+            <ScrollPane hvalue="0.5">
+                <VBox alignment="CENTER" fx:id="chartHolder" prefWidth="3000" />
+            </ScrollPane>
             <TableView fx:id="tradesTable">
                 <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
                 <columns>

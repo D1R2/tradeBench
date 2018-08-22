@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Daniel Gelber
  * @version 1.0
  * Created  2018-08-03
- * Modified 2018-08-03
+ * Modified 2018-08-08
  */
 public class Trade {
 
