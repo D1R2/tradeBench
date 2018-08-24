@@ -20,10 +20,10 @@ import java.util.Optional;
  * happen to the GUI happens in this class, except for the original definition
  * of the GUI elements.
  *
- * @author Daniel Gelber
+ * @author Daniel Gelber and David Randolph
  * @version 1.0
  * Created  2018-08-03
- * Modified 2018-08-08
+ * Modified 2018-08-24
  */
 
 
@@ -78,9 +78,7 @@ public class Controller {
     }
 
     /**
-     * Reloads the chart with new data, particularly when a user
-     * clicks on a new trade in the table.
-     * //@param trade the trade to load the chart with. FIXME remove this line?
+     * Reloads the chart with new data, particularly when a user clicks on a new trade in the table.
      */
     public void loadChart() {
         //FIXME change to get input by clicking a trade from the chart.
@@ -130,11 +128,20 @@ public class Controller {
 
     }
 
+    /**
+     * Enables user to import market data from a text file into the app's database.
+     * FIXME Replace this method with a file-selector.
+     */
     @FXML public void importMarketData() {
         //FIXME change to file selector.
+
+        //Dialog box to set file-path.
         String url = textInputDialog("Set Filepath","Enter the file's filepath", "Filepath: ");
+
+        //Dialog box to set name of table to write to.
         String tableName = tableSelect();
 
+        //Terminate process if no table selected, otherwise process data from file to database.
         if(tableName.equals("None")) {
             warningAlert("No table selected.", "Please try again.");
             return;
@@ -143,15 +150,25 @@ public class Controller {
             TradeBenchModel.processMarketData(url, tableName);
         }
 
+        //Information dialog box reports if succesful.
         String content = "Data succesfully imported to '" + tableName + "'.";
         informationDialog("Success!", content);
     }
 
+
+    /**
+     * Enables user to import trade data from a .csv file into the app's database.
+     * FIXME Replace this method with a file-selector.
+     */
     @FXML public void importTradeData() {
-        //FIXME Change to file selector.
+
+        //Dialog box to set file-path.
         String url = textInputDialog("Set Filepath","Enter the file's filepath", "Filepath: ");
+
+        //Dialog box to set name of table to write to.
         String tableName = tableSelect();
 
+        //Terminate process if no table selected, otherwise process data from file to database.
         if(tableName.equals("None")) {
             warningAlert("No table selected.", "Please try again.");
             return;
@@ -160,19 +177,27 @@ public class Controller {
             TradeBenchModel.processTradeExports(url, tableName);
         }
 
+        //Information dialog box reports if succesful.
         String content = "Data succesfully imported to '" + tableName + "'.";
         informationDialog("Success!", content);
     }
 
+    /**
+     * Dialog box that allows user to select(or create) which table to use. Returns tableName as a string.
+     * @return String - Selected Table's name.
+     */
     public String tableSelect() {
 
+        //Set string array tableChoices of the names of existing tables + "Create New" and "Select Table.
         ArrayList<String> tableChoices = TradeBenchModel.getTableNames();
         tableChoices.add("Create New");
         tableChoices.add("Select Table");
 
+        //Lets user select which table to use from a dropdown selection box w/ tableChoices as options.
         String tableSelection = optionDialog("Select Table", "Select which table you'd like to import to.",
                 "Choose Table", tableChoices, "Select Table");
 
+        //Runs the createNewTable function if the user selected 'Create New'. Returns result of createNewTable.
         if (tableSelection.equals("Create New")) {
             if(createNewTable()){
                 return newTableName;
@@ -181,6 +206,8 @@ public class Controller {
                 return "None";
             }
         }
+
+        //Returns "None" if no table was selected, otherwise returns name of selected table.
         else if (tableSelection.equals("Select Table")) {
             return "None";
         }
@@ -191,37 +218,45 @@ public class Controller {
 
     @FXML
     public boolean createNewTable(){
+        //Array list of table type choices.
         ArrayList<String> choices = new ArrayList<String>();
         choices.add("Market Data");
         choices.add("Trade Data");
         choices.add("Select Table Type");
 
+        //Get user selection via dropdown dialog box.
         String choice = optionDialog("New Table Type","Select new table type: ", "Table type: ",
                 choices,"Select Table Type");
 
         if(!choice.equals("Select Table Type")) {
+            //If choice is not "Select Table Type", retrieve input for new table name.
             newTableName = textInputDialog("Create New Table", "Please enter name of new table.",
                     "Table Name: ");
+            //Verify that name is not already taken.
             if(TradeBenchModel.checkExists(newTableName)){
                 warningAlert("This table already exists", "Please try a different table name.");
                 return false;
             }
+            //Create the new table if that name is not taken.
             else if(choice.equals("Market Data")) {
                 TradeBenchModel.createMarketTable(newTableName);
             }
             else if(choice.equals("Trade Data")) {
                 TradeBenchModel.createTradeTable(newTableName);
             }
+            //Return false if something goes wrong.
             else {
                 warningAlert("Something went wrong.", "Please try again.");
                 return false;
             }
-
         }
+
+        //Return false if the user did not select a table type.
         else{
             return false;
         }
 
+        //If table created succesfully, report it via dialog and return true.
         String content = "'" + newTableName + "' was created succesfully.";
         informationDialog("Success!", content);
 
@@ -254,35 +289,45 @@ public class Controller {
 
     }
 
+    /**
+     * Deletes a selected table from the database.
+     */
     @FXML
     public void deleteTable() {
+        //ArrayList of existing table names + "String Table" option.
         ArrayList<String> tableChoices = TradeBenchModel.getTableNames();
         tableChoices.add("Select Table");
 
+        //ArrayList for choices yes and no.
         ArrayList<String> yesNo = new ArrayList<String>();
         yesNo.add("No");
         yesNo.add("Yes");
 
-
+        //Retrieves user-selected table name using an option Dialog box.
         String tableSelection = optionDialog("Select Table", "Select which table you'd like to delete.",
                 "Choose Table", tableChoices, "Select Table");
 
-
+        //Initiate "confirm" variable with default choice as no.
         String confirm = "No";
 
+        //Displays a warning/verification box to verify intent to delete if an existing table was selected.
         if(!tableSelection.equals("Select Table")) {
             confirm = optionDialog("WARNING", "This table will be PERMANENTLY DELETED.", "Are you " +
                             "sure you wish to proceed?", yesNo, "No");
         }
+        //Informs that a table wasn't selected and terminates process if no table was selected.
         else{
             informationDialog("No table selected.", "Please try again.");
             return;
         }
 
+        //Initiates "content" string for later use.
         String content = null;
 
+        //Deletes the table if the user selected "Yes".
         if(confirm.equals("Yes")) {
             TradeBenchModel.dropTable(tableSelection);
+            //Checks that the table no longer exists and displays appropriate message.
             if(!TradeBenchModel.checkExists(tableSelection)) {
                 content = "The '" + tableSelection + "' table was succesfully deleted.";
                 informationDialog("Success.", content);
@@ -292,6 +337,7 @@ public class Controller {
                 warningAlert("An error occured.", content);
             }
         }
+        //Informs that table was not deleted if the user selected yes.
         else{
             content = "The '" + tableSelection + "' was not deleted.";
             informationDialog("Operation aborted.", content);
@@ -321,6 +367,11 @@ public class Controller {
         return this.output;
     }
 
+    /**
+     * Displays a warning dialog box with the desired message.
+     * @param header    Header of the window. Set null to not have one.
+     * @param content   The warning message to display.
+     */
     public void warningAlert(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -330,6 +381,15 @@ public class Controller {
         alert.showAndWait();
     }
 
+    /**
+     * A dialog box to retrieve a String from the user via a dropdown box of options.
+     * @param title     The title of the box.
+     * @param header    The header of the box. Set null to not have one.
+     * @param content   The message next to the dropdown list.
+     * @param options   The string array containing the options that will appear in the dropdown list.
+     * @param defaultChoice The choice the dropdown list starts on.
+     * @return
+     */
     public String optionDialog(String title, String header, String content, ArrayList<String> options,
                                String defaultChoice) {
 
