@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd59a88b-df1e-473a-ab4e-d767c244159d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_23_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_23_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/sqlite-jdbc-3.23.1.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tradeBench/main/java/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tradeBench/main/java/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tradeBench/main/java/Models/TradeBenchModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tradeBench/main/java/Models/TradeBenchModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tradeBench/main/resources/fxml/ui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tradeBench/main/resources/fxml/ui.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tradeBench/main/resources/python-scripts/data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tradeBench/main/resources/styles/MainStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tradeBench/main/resources/styles/MainStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Models/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/Trade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Models/TradeBenchModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Models/TradeBenchModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/ui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/ui.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/python-scripts/data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/MainStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/MainStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradeBench.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tradeBench.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,33 +54,80 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="641437833">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="6" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.8" value="2" />
+          <entry key="project.opened" value="6" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="7158" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="7158" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
-              <caret line="274" column="57" selection-start-line="274" selection-start-column="57" selection-end-line="274" selection-end-column="57" />
+            <state relative-caret-position="438">
+              <caret line="166" column="7" lean-forward="true" selection-start-line="166" selection-start-column="7" selection-end-line="166" selection-end-column="7" />
+              <folding>
+                <element signature="docComment;method#createNewTable#0;class#Controller#0" />
+                <element signature="method#createNewTable#0;class#Controller#0" />
+                <element signature="docComment;method#importMarketData#0;class#Controller#0" />
+                <element signature="method#importMarketData#0;class#Controller#0" />
+                <element signature="docComment;method#importTradeData#0;class#Controller#0" />
+                <element signature="method#importTradeData#0;class#Controller#0" />
+                <element signature="docComment;method#loadTrades#0;class#Controller#0" />
+                <element signature="method#loadTrades#0;class#Controller#0" />
+                <element signature="docComment;method#loadChart#0;class#Controller#0" />
+                <element signature="method#loadChart#0;class#Controller#0" />
+                <element signature="docComment;method#deleteTable#0;class#Controller#0" />
+                <element signature="method#deleteTable#0;class#Controller#0" />
+                <element signature="docComment;method#tableSelect#0;class#Controller#0" />
+                <element signature="method#tableSelect#0;class#Controller#0" />
+                <element signature="docComment;method#informationDialog#0;class#Controller#0" />
+                <element signature="method#informationDialog#0;class#Controller#0" />
+                <element signature="docComment;method#optionDialog#0;class#Controller#0" />
+                <element signature="method#optionDialog#0;class#Controller#0" />
+                <element signature="docComment;method#textInputDialog#0;class#Controller#0" />
+                <element signature="method#textInputDialog#0;class#Controller#0" />
+                <element signature="docComment;method#warningAlert#0;class#Controller#0" />
+                <element signature="method#warningAlert#0;class#Controller#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/ui.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+            <state relative-caret-position="306">
+              <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
             </state>
           </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/styles/CandleStickChartStyles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="66" column="2" lean-forward="true" selection-start-line="66" selection-start-column="2" selection-end-line="66" selection-end-column="32" />
+            <state relative-caret-position="102">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
@@ -94,26 +135,56 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/styles/MainStyle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="547">
+            <state relative-caret-position="1173">
               <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Models/TradeBenchModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="200" column="42" selection-start-line="200" selection-start-column="42" selection-end-line="200" selection-end-column="42" />
+            <state relative-caret-position="221">
+              <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+              <folding>
+                <element signature="docComment;method#createMarketTable#0;class#TradeBenchModel#0" />
+                <element signature="e#1314#1382#0" />
+                <element signature="docComment;method#createTradeTable#0;class#TradeBenchModel#0" />
+                <element signature="method#createTradeTable#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#processMarketData#0;class#TradeBenchModel#0" />
+                <element signature="method#processMarketData#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#processTradeData#0;class#TradeBenchModel#0" />
+                <element signature="method#processTradeData#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#getTradeList#0;class#TradeBenchModel#0" />
+                <element signature="method#getTradeList#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#getBars#0;class#TradeBenchModel#0" />
+                <element signature="method#getBars#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#checkExists#0;class#TradeBenchModel#0" />
+                <element signature="method#checkExists#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#getTableNames#0;class#TradeBenchModel#0" />
+                <element signature="method#getTableNames#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#dropTable#0;class#TradeBenchModel#0" />
+                <element signature="method#dropTable#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#getNextTradeNumber#0;class#TradeBenchModel#0" />
+                <element signature="method#getNextTradeNumber#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#formatMarketDateTime#0;class#TradeBenchModel#0" />
+                <element signature="method#formatMarketDateTime#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#formatTradeDateTime#0;class#TradeBenchModel#0" />
+                <element signature="method#formatTradeDateTime#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#getTrade#0;class#TradeBenchModel#0" />
+                <element signature="method#getTrade#0;class#TradeBenchModel#0" />
+                <element signature="docComment;method#offsetTradeTime#0;class#TradeBenchModel#0" />
+                <element signature="method#offsetTradeTime#0;class#TradeBenchModel#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/TradeBench.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="42" column="21" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
+            <state relative-caret-position="357">
+              <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
               <folding>
                 <element signature="e#1265#1266#0" expanded="true" />
                 <element signature="e#1293#1294#0" expanded="true" />
@@ -122,16 +193,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/javafx.graphics/com/sun/glass/ui/gtk/GtkApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="276" selection-start-line="276" selection-end-line="276" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>offsetTradeTime</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -148,10 +215,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="y" value="27" />
-    <option name="width" value="1853" />
-    <option name="height" value="1053" />
+    <option name="x" value="65" />
+    <option name="y" value="25" />
+    <option name="width" value="1855" />
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -159,12 +226,25 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="tradeBench" type="b2602c69:ProjectViewProjectNode" />
               <item name="tradeBench" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tradeBench" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tradeBench" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tradeBench" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tradeBench" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="libraries" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tradeBench" type="b2602c69:ProjectViewProjectNode" />
@@ -198,6 +278,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Helpers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tradeBench" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tradeBench" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="Models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -223,24 +311,27 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="styles" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="tradeBench" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534979372019" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/sqlite-jdbc-3.23.1.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536719889740" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea/libraries/sqlite-jdbc-3.23.1.jar!/" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rando\OneDrive\Desktop\github\tradeBench\tradeBench\.idea\libraries" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -288,68 +379,42 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24958494" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.17718121" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="UI Designer" order="6" />
+      <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32900432" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32577905" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39935064" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Maven Projects" order="6" />
+      <window_info anchor="right" id="Palette" order="7" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/javafx.graphics/com/sun/glass/ui/gtk/GtkApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="276" selection-start-line="276" selection-end-line="276" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/styles/MainStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/styles/CandleStickChartStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="66" column="2" lean-forward="true" selection-start-line="66" selection-start-column="2" selection-end-line="66" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/ui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/javafx.graphics/com/sun/glass/ui/gtk/GtkApplication.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/Models/Trade.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-60">
@@ -359,25 +424,101 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="274" column="57" selection-start-line="274" selection-start-column="57" selection-end-line="274" selection-end-column="57" />
+        <state relative-caret-position="438">
+          <caret line="166" column="7" lean-forward="true" selection-start-line="166" selection-start-column="7" selection-end-line="166" selection-end-column="7" />
+          <folding>
+            <element signature="docComment;method#createNewTable#0;class#Controller#0" />
+            <element signature="method#createNewTable#0;class#Controller#0" />
+            <element signature="docComment;method#importMarketData#0;class#Controller#0" />
+            <element signature="method#importMarketData#0;class#Controller#0" />
+            <element signature="docComment;method#importTradeData#0;class#Controller#0" />
+            <element signature="method#importTradeData#0;class#Controller#0" />
+            <element signature="docComment;method#loadTrades#0;class#Controller#0" />
+            <element signature="method#loadTrades#0;class#Controller#0" />
+            <element signature="docComment;method#loadChart#0;class#Controller#0" />
+            <element signature="method#loadChart#0;class#Controller#0" />
+            <element signature="docComment;method#deleteTable#0;class#Controller#0" />
+            <element signature="method#deleteTable#0;class#Controller#0" />
+            <element signature="docComment;method#tableSelect#0;class#Controller#0" />
+            <element signature="method#tableSelect#0;class#Controller#0" />
+            <element signature="docComment;method#informationDialog#0;class#Controller#0" />
+            <element signature="method#informationDialog#0;class#Controller#0" />
+            <element signature="docComment;method#optionDialog#0;class#Controller#0" />
+            <element signature="method#optionDialog#0;class#Controller#0" />
+            <element signature="docComment;method#textInputDialog#0;class#Controller#0" />
+            <element signature="method#textInputDialog#0;class#Controller#0" />
+            <element signature="docComment;method#warningAlert#0;class#Controller#0" />
+            <element signature="method#warningAlert#0;class#Controller#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Models/TradeBenchModel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/styles/MainStyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="200" column="42" selection-start-line="200" selection-start-column="42" selection-end-line="200" selection-end-column="42" />
+        <state relative-caret-position="1173">
+          <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/TradeBench.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="42" column="21" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
+        <state relative-caret-position="357">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
           <folding>
             <element signature="e#1265#1266#0" expanded="true" />
             <element signature="e#1293#1294#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/ui.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/styles/CandleStickChartStyles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Models/TradeBenchModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <folding>
+            <element signature="docComment;method#createMarketTable#0;class#TradeBenchModel#0" />
+            <element signature="e#1314#1382#0" />
+            <element signature="docComment;method#createTradeTable#0;class#TradeBenchModel#0" />
+            <element signature="method#createTradeTable#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#processMarketData#0;class#TradeBenchModel#0" />
+            <element signature="method#processMarketData#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#processTradeData#0;class#TradeBenchModel#0" />
+            <element signature="method#processTradeData#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#getTradeList#0;class#TradeBenchModel#0" />
+            <element signature="method#getTradeList#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#getBars#0;class#TradeBenchModel#0" />
+            <element signature="method#getBars#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#checkExists#0;class#TradeBenchModel#0" />
+            <element signature="method#checkExists#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#getTableNames#0;class#TradeBenchModel#0" />
+            <element signature="method#getTableNames#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#dropTable#0;class#TradeBenchModel#0" />
+            <element signature="method#dropTable#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#getNextTradeNumber#0;class#TradeBenchModel#0" />
+            <element signature="method#getNextTradeNumber#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#formatMarketDateTime#0;class#TradeBenchModel#0" />
+            <element signature="method#formatMarketDateTime#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#formatTradeDateTime#0;class#TradeBenchModel#0" />
+            <element signature="method#formatTradeDateTime#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#getTrade#0;class#TradeBenchModel#0" />
+            <element signature="method#getTrade#0;class#TradeBenchModel#0" />
+            <element signature="docComment;method#offsetTradeTime#0;class#TradeBenchModel#0" />
+            <element signature="method#offsetTradeTime#0;class#TradeBenchModel#0" />
           </folding>
         </state>
       </provider>
@@ -439,7 +580,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
