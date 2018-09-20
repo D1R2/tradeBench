@@ -1,0 +1,6 @@
+# Ignore output
+out/
+
+# Ignore IntelliJ stuff
+.idea/
+*.iml
