@@ -17,9 +17,15 @@ import java.math.BigDecimal;
 import java.util.GregorianCalendar;
 
 /**
+ * A model for a candle on a candlestick chart.
+ *
  * @author RobTerpilowski
+ * Modified by Daniel Gelber
+ * Modified 2018-09-20
  */
 public class BarData implements Serializable {
+
+    // STATIC PROPERTIES
 
     public static long serialVersionUID = 1L;
 
@@ -33,6 +39,8 @@ public class BarData implements Serializable {
         TICK, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, YEAR
     };
 
+    // INSTANCE VARIABLES
+
     protected double open;
     protected BigDecimal formattedOpen;
     protected double high;
@@ -45,12 +53,26 @@ public class BarData implements Serializable {
     protected long openInterest = 0;
     protected int barLength = 1;
     protected GregorianCalendar dateTime;
-    //protected Logger logger = Logger.getLogger( Bar.class );
 
+    /**
+     * Initializes a BarData. Default, does nothing.
+     */
     public BarData() {
+
     }
 
-    public BarData( GregorianCalendar dateTime, double open, double high, double low, double close, long volume) {
+    /**
+     * Initializes a BarData.
+     *
+     * @param dateTime the time
+     * @param open     the open
+     * @param high     the high
+     * @param low      the low
+     * @param close    the close
+     * @param volume   the volume
+     */
+    public BarData(GregorianCalendar dateTime, double open, double high, double low, double close, long volume) {
+
         this.dateTime = dateTime;
         this.open = open;
         this.formattedOpen = format(open);
@@ -61,126 +83,96 @@ public class BarData implements Serializable {
         this.high = high;
         this.formattedHigh = format(high);
         this.volume = volume;
+
+    }
+
+    /**
+     * Initializes a BarData.
+     *
+     * @param dateTime     the time
+     * @param open         the open
+     * @param high         the high
+     * @param low          the low
+     * @param close        the close
+     * @param volume       the volume
+     * @param openInterest the open interest
+     */
+    public BarData(GregorianCalendar dateTime, double open, double high, double low, double close, long volume, long openInterest) {
+
+        this(dateTime, open, high, low, close, volume);
+        this.openInterest = openInterest;
+
     }
 
 
-    /**
-     * Creates a new instance of a Bar
-     *
-     * @param dateTime The date of this bar.
-     * @param open The open price.
-     * @param high The high price.
-     * @param low The low price.
-     * @param close The closing price.
-     * @param volume The volume for the bar.
-     * @param openInterest The open interest for the bar.
-     */
-    public BarData(GregorianCalendar dateTime, double open, double high, double low, double close, long volume, long openInterest) {
-        this(dateTime, open, high, low, close, volume);
-        this.openInterest = openInterest;
-    }//constructor()
+    // GETTERS AND SETTERS
 
     public GregorianCalendar getDateTime() {
         return dateTime;
+    }
+
+    public double getOpen() {
+        return open;
+    }
+
+    public double getHigh() {
+        return high;
+    }
+
+    public double getLow() {
+        return low;
+    }
+
+    public double getClose() {
+        return close;
+    }
+
+    public long getVolume() {
+        return volume;
+    }
+
+    public long getOpenInterest() {
+        return openInterest;
+    }
+
+    public void setOpen(double open) {
+        this.open = open;
+    }
+
+    public void setHigh(double high) {
+        this.high = high;
+    }
+
+    public void setLow(double low) {
+        this.low = low;
+    }
+
+    public void setClose(double close) {
+        this.close = close;
+    }
+
+    public void setVolume(long volume) {
+        this.volume = volume;
+    }
+
+    public void setOpenInterest(long openInterest) {
+        this.openInterest = openInterest;
     }
 
     public void setDateTime(GregorianCalendar dateTime) {
         this.dateTime = dateTime;
     }
 
-    /**
-     * @return the open price of this bar.
-     */
-    public double getOpen() {
-        return open;
-    }
+
+    // LOGIC
 
     /**
-     * @return the High price of this bar.
-     */
-    public double getHigh() {
-        return high;
-    }
-
-    /*
-     * @return the Low price of this Bar.
-     */
-    public double getLow() {
-        return low;
-    }
-
-    /**
-     * @return the close price for this bar.
-     */
-    public double getClose() {
-        return close;
-    }
-
-    /**
-     * @return the Volume for this bar.
-     */
-    public long getVolume() {
-        return volume;
-    }
-
-    /**
-     * @return the open interest for this bar.
-     */
-    public long getOpenInterest() {
-        return openInterest;
-    }
-
-    /**
-     * Sets the open price for this bar.
+     * Updates this BarData given new information.
      *
-     * @param open The open price for this bar.
+     * @param close the close
      */
-    public void setOpen(double open) {
-        this.open = open;
-    }
+    public void update(double close) {
 
-    /**
-     * Sets the high price for this bar.
-     *
-     * @param high The high price for this bar.
-     */
-    public void setHigh(double high) {
-        this.high = high;
-    }
-
-    /**
-     * Sets the low price for this bar.
-     *
-     * @param low The low price for this bar.
-     */
-    public void setLow(double low) {
-        this.low = low;
-    }
-
-    /**
-     * Sets the closing price for this bar.
-     *
-     * @param close The closing price for this bar.
-     */
-    public void setClose(double close) {
-        this.close = close;
-    }
-
-    /**
-     * Sets the volume for this bar.
-     *
-     * @param volume Sets the volume for this bar.
-     */
-    public void setVolume(long volume) {
-        this.volume = volume;
-    }
-
-
-    /**
-     * Updates the last price, adjusting the high and low
-     * @param close The last price
-     */
-    public void update( double close ) {
         if( close > high ) {
             high = close;
         }
@@ -189,26 +181,29 @@ public class BarData implements Serializable {
             low = close;
         }
         this.close = close;
-    }
 
+    }
 
     /**
-     * Sets the open interest for this bar.
+     * Formats the price into a BigDecimal.
      *
-     * @param openInterest The open interest for this bar.
+     * @param price the price
+     * @return the BigDecimal
      */
-    public void setOpenInterest(long openInterest) {
-        this.openInterest = openInterest;
-    }
+    protected BigDecimal format(double price) {
 
-    protected BigDecimal format( double price ) {
         return BigDecimal.ZERO;
+
     }
 
+
+    // OBJECT METHODS
 
     @Override
     public String toString() {
+
         StringBuilder sb = new StringBuilder();
+
         sb.append("Date: ").append(dateTime.getTime());
         sb.append(" Open: ").append(open);
         sb.append(" High: ").append(high);
@@ -218,13 +213,16 @@ public class BarData implements Serializable {
         sb.append(" Open Int ").append(openInterest);
 
         return sb.toString();
-    }//toString()
+
+    }
 
     @Override
     public int hashCode() {
+
         final int PRIME = 31;
         int result = 1;
         long temp;
+
         temp = Double.doubleToLongBits(close);
         result = PRIME * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(high);
@@ -237,11 +235,14 @@ public class BarData implements Serializable {
         result = PRIME * result + (int) (temp ^ (temp >>> 32));
         result = PRIME * result + ((dateTime == null) ? 0 : dateTime.hashCode());
         result = PRIME * result + (int) (volume ^ (volume >>> 32));
+
         return result;
+
     }
 
     @Override
     public boolean equals(Object obj) {
+
         if (this == obj) {
             return true;
         }
@@ -277,7 +278,9 @@ public class BarData implements Serializable {
         if (volume != other.volume) {
             return false;
         }
+
         return true;
+
     }
 
 }

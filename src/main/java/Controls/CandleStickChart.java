@@ -41,14 +41,18 @@ import javafx.util.Duration;
 /**
  * A candlestick chart is a style of bar-chart used primarily to describe price
  * movements of a security, derivative, or currency over time.
- *
+ * <p>
  * The Data Y value is used for the opening price and then the close, high and
  * low values are stored in the Data's extra value property using a
  * CandleStickExtraValues object.
  *
  * @author RobTerpilowski
+ * Modified by Daniel Gelber
+ * Modified 2018-09-20
  */
 public class CandleStickChart extends XYChart<String, Number> {
+
+    // PROPERTIES
 
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     protected static final Logger logger = Logger.getLogger(CandleStickChart.class.getName());
@@ -59,37 +63,44 @@ public class CandleStickChart extends XYChart<String, Number> {
     protected CategoryAxis xAxis;
 
 
+    // CONSTRUCTORS
 
     /**
+     * Instantiates a new Candle stick chart.
      *
-     * @param title The chart title
-     * @param bars  The bars data to display in the chart.
+     * @param title the chart title
+     * @param bars  the bars data to display in the chart
      */
     public CandleStickChart(String title, List<BarData> bars) {
+
         this(title, bars, Integer.MAX_VALUE);
+
     }
 
-
     /**
+     * Instantiates a new Candle stick chart.
      *
-     * @param title The chart title
-     * @param bars The bars to display in the chart
-     * @param maxBarsToDisplay The maximum number of bars to display in the chart.
+     * @param title            the chart title
+     * @param bars             the bars to display in the chart
+     * @param maxBarsToDisplay the maximum number of bars to display in the chart
      */
     public CandleStickChart(String title, List<BarData> bars, int maxBarsToDisplay) {
+
         this(title, new CategoryAxis(), new NumberAxis(), bars, maxBarsToDisplay);
+
     }
 
     /**
      * Construct a new CandleStickChart with the given axis.
      *
-     * @param title The chart title
-     * @param xAxis The x axis to use
-     * @param yAxis The y axis to use
-     * @param bars The bars to display on the chart
-     * @param maxBarsToDisplay The maximum number of bars to display on the chart.
+     * @param title            the chart title
+     * @param xAxis            the x axis to use
+     * @param yAxis            the y axis to use
+     * @param bars             the bars to display on the chart
+     * @param maxBarsToDisplay the maximum number of bars to display on the chart
      */
     public CandleStickChart(String title, CategoryAxis xAxis, NumberAxis yAxis, List<BarData> bars, int maxBarsToDisplay) {
+
         super(xAxis, yAxis);
         this.xAxis = xAxis;
         this.yAxis = yAxis;
@@ -115,20 +126,26 @@ public class CandleStickChart extends XYChart<String, Number> {
 
         setData(dataSeries);
         lastBar = sublist.get(sublist.size() - 1);
+
     }
 
+
+    // LOGIC
 
     /**
      * Defines a formatter to use when formatting the y-axis values.
-     * @param formatter The formatter to use when formatting the y-axis values.
+     *
+     * @param formatter The formatter to use when formatting the y-axis values
      */
     public void setYAxisFormatter(DecimalAxisFormatter formatter) {
-        yAxis.setTickLabelFormatter(formatter);
-    }
 
+        yAxis.setTickLabelFormatter(formatter);
+
+    }
 
     /**
      * Appends a new bar on to the end of the chart.
+     *
      * @param bar The bar to append to the chart
      */
     public void addBar(BarData bar) {
@@ -137,9 +154,9 @@ public class CandleStickChart extends XYChart<String, Number> {
             dataSeries.get(0).getData().remove(0);
         }
 
-        int datalength = dataSeries.get(0).getData().size();
-        dataSeries.get(0).getData().get(datalength - 1).setYValue(bar.getOpen());
-        dataSeries.get(0).getData().get(datalength - 1).setExtraValue(bar);
+        int dataLength = dataSeries.get(0).getData().size();
+        dataSeries.get(0).getData().get(dataLength - 1).setYValue(bar.getOpen());
+        dataSeries.get(0).getData().get(dataLength - 1).setExtraValue(bar);
         String label = sdf.format(bar.getDateTime().getTime());
 
         lastBar = new BarData(bar.getDateTime(), bar.getClose(), bar.getClose(), bar.getClose(), bar.getClose(), 0);
@@ -148,12 +165,13 @@ public class CandleStickChart extends XYChart<String, Number> {
 
     }
 
-
     /**
-     * Update the "Last" price of the most recent bar
-     * @param price The Last price of the most recent bar.
+     * Update the "Last" price of the most recent bar.
+     *
+     * @param price The Last price of the most recent bar
      */
     public void updateLast(double price) {
+
         if (lastBar != null) {
             lastBar.update(price);
 
@@ -162,94 +180,134 @@ public class CandleStickChart extends XYChart<String, Number> {
 
             dataSeries.get(0).getData().get(datalength - 1).setExtraValue(lastBar);
         }
+
     }
 
 
-
+    /**
+     * Gets sub list.
+     *
+     * @param bars    the bars
+     * @param maxBars the max bars
+     * @return the sub list
+     */
     protected List<BarData> getSubList(List<BarData> bars, int maxBars) {
+
         List<BarData> sublist;
         if (bars.size() > maxBars) {
             return bars.subList(bars.size() - 1 - maxBars, bars.size() - 1);
         } else {
             return bars;
         }
+
     }
 
-    // -------------- METHODS ------------------------------------------------------------------------------------------
     /**
-     * Called to update and layout the content for the plot
+     * Called to update and layout the content for the plot.
      */
     @Override
     protected void layoutPlotChildren() {
-        // we have nothing to layout if no data is present
+
+        // We have nothing to layout if no data is present
         if (getData() == null) {
             return;
         }
-        // update candle positions
+
+        // Update candle positions
         for (int seriesIndex = 0; seriesIndex < getData().size(); seriesIndex++) {
+
             Series<String, Number> series = getData().get(seriesIndex);
             Iterator<Data<String, Number>> iter = getDisplayedDataIterator(series);
-            Path seriesPath = null;
+            Path seriesPath;
+
             if (series.getNode() instanceof Path) {
                 seriesPath = (Path) series.getNode();
                 seriesPath.getElements().clear();
             }
+
             while (iter.hasNext()) {
+
                 Data<String, Number> item = iter.next();
                 double x = getXAxis().getDisplayPosition(getCurrentDisplayedXValue(item));
                 double y = getYAxis().getDisplayPosition(getCurrentDisplayedYValue(item));
                 Node itemNode = item.getNode();
                 BarData bar = (BarData) item.getExtraValue();
+
                 if (itemNode instanceof Candle && item.getYValue() != null) {
+
                     Candle candle = (Candle) itemNode;
 
                     double close = getYAxis().getDisplayPosition(bar.getClose());
                     double high = getYAxis().getDisplayPosition(bar.getHigh());
                     double low = getYAxis().getDisplayPosition(bar.getLow());
                     double candleWidth = 10;
-                    // update candle
+
+                    // Update candle
                     candle.update(close - y, high - y, low - y, candleWidth);
 
-                    // update tooltip content
+                    // Update tooltip content
                     candle.updateTooltip(bar.getOpen(), bar.getClose(), bar.getHigh(), bar.getLow());
 
-                    // position the candle
+                    // Position the candle
                     candle.setLayoutX(x);
                     candle.setLayoutY(y);
+
                 }
 
             }
+
         }
+
     }
 
+    /**
+     * Unused.
+     */
     @Override
     protected void dataItemChanged(Data<String, Number> item) {
     }
 
+    /**
+     * Adds a candle when a new data point is added.
+     * @param series    the series
+     * @param itemIndex the item index
+     * @param item      the item
+     */
     @Override
     protected void dataItemAdded(Series<String, Number> series, int itemIndex, Data<String, Number> item) {
+
         Node candle = createCandle(getData().indexOf(series), item, itemIndex);
+
         if (shouldAnimate()) {
             candle.setOpacity(0);
             getPlotChildren().add(candle);
-            // fade in new candle
+            // Fade in new candle
             FadeTransition ft = new FadeTransition(Duration.millis(500), candle);
             ft.setToValue(1);
             ft.play();
         } else {
             getPlotChildren().add(candle);
         }
-        // always draw average line on top
+
+        // Always draw average line on top
         if (series.getNode() != null) {
             series.getNode().toFront();
         }
+
     }
 
+    /**
+     * Removes a candle when the data point is removed.
+     * @param item   the item
+     * @param series the series
+     */
     @Override
     protected void dataItemRemoved(Data<String, Number> item, Series<String, Number> series) {
+
         final Node candle = item.getNode();
+
         if (shouldAnimate()) {
-            // fade out old candle
+            // Fade out old candle
             FadeTransition ft = new FadeTransition(Duration.millis(500), candle);
             ft.setToValue(0);
             ft.setOnFinished((ActionEvent actionEvent) -> {
@@ -259,18 +317,25 @@ public class CandleStickChart extends XYChart<String, Number> {
         } else {
             getPlotChildren().remove(candle);
         }
+
     }
 
+    /**
+     * Adds new candles when a series is added.
+     * @param series      the series
+     * @param seriesIndex the series index
+     */
     @Override
     protected void seriesAdded(Series<String, Number> series, int seriesIndex) {
-        // handle any data already in series
+
+        // Handle any data already in series
         for (int j = 0; j < series.getData().size(); j++) {
             Data item = series.getData().get(j);
             Node candle = createCandle(seriesIndex, item, j);
             if (shouldAnimate()) {
                 candle.setOpacity(0);
                 getPlotChildren().add(candle);
-                // fade in new candle
+                // Fade in new candle
                 FadeTransition ft = new FadeTransition(Duration.millis(500), candle);
                 ft.setToValue(1);
                 ft.play();
@@ -278,20 +343,29 @@ public class CandleStickChart extends XYChart<String, Number> {
                 getPlotChildren().add(candle);
             }
         }
-        // create series path
+
+        // Create series path
         Path seriesPath = new Path();
         seriesPath.getStyleClass().setAll("candlestick-average-line", "series" + seriesIndex);
         series.setNode(seriesPath);
         getPlotChildren().add(seriesPath);
+
     }
 
+    /**
+     * Removes candles when a series is removed.
+     * @param series the series
+     */
     @Override
     protected void seriesRemoved(Series<String, Number> series) {
-        // remove all candle nodes
+
+        // Remove all candle nodes
         for (XYChart.Data<String, Number> d : series.getData()) {
+
             final Node candle = d.getNode();
+
             if (shouldAnimate()) {
-                // fade out old candle
+                // Fade out old candle
                 FadeTransition ft = new FadeTransition(Duration.millis(500), candle);
                 ft.setToValue(0);
                 ft.setOnFinished((ActionEvent actionEvent) -> {
@@ -301,27 +375,33 @@ public class CandleStickChart extends XYChart<String, Number> {
             } else {
                 getPlotChildren().remove(candle);
             }
+
         }
+
     }
 
     /**
-     * Create a new Candle node to represent a single data item
+     * Create a new Candle node to represent a single data item.
      *
-     * @param seriesIndex The index of the series the data item is in
-     * @param item The data item to create node for
-     * @param itemIndex The index of the data item in the series
+     * @param seriesIndex the index of the series the data item is in
+     * @param item        the data item to create node for
+     * @param itemIndex   the index of the data item in the series
      * @return New candle node to represent the give data item
      */
     private Node createCandle(int seriesIndex, final Data item, int itemIndex) {
+
         Node candle = item.getNode();
-        // check if candle has already been created
+
+        // Check if candle has already been created
         if (candle instanceof Candle) {
             ((Candle) candle).setSeriesAndDataStyleClasses("series" + seriesIndex, "data" + itemIndex);
         } else {
             candle = new Candle("series" + seriesIndex, "data" + itemIndex);
             item.setNode(candle);
         }
+
         return candle;
+
     }
 
     /**
@@ -332,18 +412,21 @@ public class CandleStickChart extends XYChart<String, Number> {
      */
     @Override
     protected void updateAxisRange() {
+
         // For candle stick chart we need to override this method as we need to let the axis know that they need to be able
         // to cover the whole area occupied by the high to low range not just its center data value
         final Axis<String> xa = getXAxis();
         final Axis<Number> ya = getYAxis();
         List<String> xData = null;
         List<Number> yData = null;
+
         if (xa.isAutoRanging()) {
             xData = new ArrayList<>();
         }
         if (ya.isAutoRanging()) {
             yData = new ArrayList<>();
         }
+
         if (xData != null || yData != null) {
             for (Series<String, Number> series : getData()) {
                 for (Data<String, Number> data : series.getData()) {
@@ -368,10 +451,11 @@ public class CandleStickChart extends XYChart<String, Number> {
                 ya.invalidateRange(yData);
             }
         }
+
     }
 
     /**
-     * Candle node used for drawing a candle
+     * Candle node used for drawing a candle.
      */
     private class Candle extends Group {
 
@@ -382,7 +466,14 @@ public class CandleStickChart extends XYChart<String, Number> {
         private boolean openAboveClose = true;
         private final Tooltip tooltip = new Tooltip();
 
+        /**
+         * Initializes a new candle.
+         *
+         * @param seriesStyleClass the series style class
+         * @param dataStyleClass   the data style class
+         */
         private Candle(String seriesStyleClass, String dataStyleClass) {
+
             setAutoSizeChildren(false);
             getChildren().addAll(highLowLine, bar);
             this.seriesStyleClass = seriesStyleClass;
@@ -390,15 +481,33 @@ public class CandleStickChart extends XYChart<String, Number> {
             updateStyleClasses();
             tooltip.setGraphic(new TooltipContent());
             Tooltip.install(bar, tooltip);
+
         }
 
+        /**
+         * Sets series and data style classes.
+         *
+         * @param seriesStyleClass the series style class
+         * @param dataStyleClass   the data style class
+         */
         public void setSeriesAndDataStyleClasses(String seriesStyleClass, String dataStyleClass) {
+
             this.seriesStyleClass = seriesStyleClass;
             this.dataStyleClass = dataStyleClass;
             updateStyleClasses();
+
         }
 
+        /**
+         * Updates the candle.
+         *
+         * @param closeOffset the close offset
+         * @param highOffset  the high offset
+         * @param lowOffset   the low offset
+         * @param candleWidth the candle width
+         */
         public void update(double closeOffset, double highOffset, double lowOffset, double candleWidth) {
+
             openAboveClose = closeOffset > 0;
             updateStyleClasses();
             highLowLine.setStartY(highOffset);
@@ -411,22 +520,42 @@ public class CandleStickChart extends XYChart<String, Number> {
             } else {
                 bar.resizeRelocate(-candleWidth / 2, closeOffset, candleWidth, closeOffset * -1);
             }
+
         }
 
+        /**
+         * Update tooltip.
+         *
+         * @param open  the open
+         * @param close the close
+         * @param high  the high
+         * @param low   the low
+         */
         public void updateTooltip(double open, double close, double high, double low) {
+
             TooltipContent tooltipContent = (TooltipContent) tooltip.getGraphic();
             tooltipContent.update(open, close, high, low);
+
         }
 
+        /**
+         * Update style class.
+         */
         private void updateStyleClasses() {
+
             getStyleClass().setAll("candlestick-candle", seriesStyleClass, dataStyleClass);
             highLowLine.getStyleClass().setAll("candlestick-line", seriesStyleClass, dataStyleClass,
                     openAboveClose ? "open-above-close" : "close-above-open");
             bar.getStyleClass().setAll("candlestick-bar", seriesStyleClass, dataStyleClass,
                     openAboveClose ? "open-above-close" : "close-above-open");
+
         }
+
     }
 
+    /**
+     * Tooltip content that pops up when a candle is hovered over.
+     */
     private class TooltipContent extends GridPane {
 
         private final Label openValue = new Label();
@@ -434,15 +563,21 @@ public class CandleStickChart extends XYChart<String, Number> {
         private final Label highValue = new Label();
         private final Label lowValue = new Label();
 
+        /**
+         * Initializes a new TooltipContent.
+         */
         private TooltipContent() {
+
             Label open = new Label("OPEN:");
             Label close = new Label("CLOSE:");
             Label high = new Label("HIGH:");
             Label low = new Label("LOW:");
+
             open.getStyleClass().add("candlestick-tooltip-label");
             close.getStyleClass().add("candlestick-tooltip-label");
             high.getStyleClass().add("candlestick-tooltip-label");
             low.getStyleClass().add("candlestick-tooltip-label");
+
             setConstraints(open, 0, 0);
             setConstraints(openValue, 1, 0);
             setConstraints(close, 0, 1);
@@ -451,17 +586,33 @@ public class CandleStickChart extends XYChart<String, Number> {
             setConstraints(highValue, 1, 2);
             setConstraints(low, 0, 3);
             setConstraints(lowValue, 1, 3);
+
             getChildren().addAll(open, openValue, close, closeValue, high, highValue, low, lowValue);
+
         }
 
+        /**
+         * Updates the Tooltip Content.
+         *
+         * @param open  the open
+         * @param close the close
+         * @param high  the high
+         * @param low   the low
+         */
         public void update(double open, double close, double high, double low) {
+
             openValue.setText(Double.toString(open));
             closeValue.setText(Double.toString(close));
             highValue.setText(Double.toString(high));
             lowValue.setText(Double.toString(low));
+
         }
+
     }
 
+    /**
+     * The constant chart.
+     */
     protected static CandleStickChart chart;
 
 }
